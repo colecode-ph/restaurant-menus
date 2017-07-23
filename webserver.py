@@ -1,54 +1,51 @@
 from BaseHTTPServer import BaseHTTPRequestHandler, HTTPServer
 import cgi
-import cgitb
-cgitb.enable()
+
+from sqlalchemy import create_engine, func
+from sqlalchemy.orm import sessionmaker
+from database_setup import Base, Restaurant, MenuItem
+
+engine = create_engine('sqlite:///restaurantmenu.db')
+# lets the program know which database we want to query
+Base.metadata.bind = engine
+# binds the engine to the Base class -
+# this makes the connections between our class definitions
+# and the corresponding tables in the database
+DBSession = sessionmaker(bind = engine)
+# creates a sessionmaker object, which establishes a link of
+# communication between our code executions and the engine we created
+session = DBSession()
+# create an instance of the DBSession  object - to make a changes
+# to the database, we can call a method within the session
 
 class webserverHandler(BaseHTTPRequestHandler): # extends BaseHTTPRequestHandler class
     def do_GET(self):  # handles all GET requests the web server receives - overrides the method
         try:           # in the BaseHTTPRequestHandler superclass ??
-            if self.path.endswith("/hello"): # pattern matching that looks for end of URL
+            if self.path.endswith("/restaurants"): # pattern matching that looks for end of URL
                 self.send_response(200)  # send response indicating successful GET request
                 self.send_header('Content-type', 'text/html') # replying with HTML format
                 self.end_headers() # sends a blank line indicating the end of HTTP headers
 
                 output = ""  # include some content to send back to the client
                 output += "<html><body>"
-                output += "<h1>Hello!</h1>" # add HTML to output stream
-                #output += "<h2>Okay, how about this: </h2>"
-                #output += "<h1> %s </h1>" % messagecontent[0]
-                # return the first value of the array that was created via form submission
-                output += (
-                    "<form method='POST' enctype='multipart/form-data' action='/hello'><h2>"
-                    "What would you like me to say?</h2><input name='message' type='text'><input"
-                    " type='submit' value='Submit'></form>")
-                # write input field as 'message' to coincide with the message field in the POST
+                output += "<h1>Testing Web Server - if you can read this it's working!</h1>"
+                output += "<ul>"
+                names = []
+                restaurantNames = session.query(Restaurant.name).order_by(Restaurant.name)
+                for restaurantName in restaurantNames:
+                    output += (
+                        "<li> {}  -<a href='#' style='text-decoration:none'> [Edit]  <a>"
+                        "<a href='#' style='text-decoration:none'> [Delete]<a></li>"
+                        .format(restaurantName[0])
+                        )
+                output += "<ul>"
+
                 output += "</body></html>"
 
                 self.wfile.write(output) # function sends message back to client
                 print (output) # see the output string in the terminal for debugging
                 return  # exit the if statement
 
-            if self.path.endswith("/hola"): # pattern matching that looks for end of URL
-                self.send_response(200)  # send response indicating successful GET request
-                self.send_header('Content-type', 'text/html') # replying with HTML format
-                self.end_headers() # sends a blank line indicating the end of HTTP headers
-
-                output = ""  # include some content to send back to the client, HTML
-                output += "<html><body>"
-                output += "<h1>&#161Hola!<a href='/hello'> Back to Hello</h1>"
-                #output += "<h2>Okay, how about this: </h2>"
-                #output += "<h1> %s </h1>" % messagecontent[0]
-                # return the first value of the array that was created via form submission
-                output += (
-                    "<form method='POST' enctype='multipart/form-data' action='/hello'><h2>"
-                    "What would you like me to say?</h2><input name='message' type='text'><input"
-                    " type='submit' value='Submit'></form>")
-                # write input field as 'message' to coincide with the message field in the POST
-                output += "</body></html>"
-
-                self.wfile.write(output) # function sends message back to client
-                print (output) # see the output string in the terminal for debugging
-                return  # exit the if statement
 
         except IOError:
             self.send.error(404, "File not found %s" % self.path) # Notify of error
