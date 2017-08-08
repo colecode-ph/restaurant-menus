@@ -1,13 +1,15 @@
 <html>
-    <body>
-        <h1>Create New Menu Item For: {{ restaurant.name }}</h1>
+<body>
 
-        <form method='POST' action='/menu/{{ restaurant.id }}/newitem/'>
-            <p>Item: <input type='text' name='item'></p>
-            <p>Description: <input type='text' name='description'></p>
-            <p>Price: <input type='text' name='price'></p>
-            <button type ='submit'>Create</button>
-        </form>
-    </body>
+    <h1>Create New Menu Item For: {{ restaurant.name }}</h1>
+
+    <form method='POST' action='/menu/{{ restaurant.id }}/newitem/'>
+        <p>Item: <input type='text' name='item'></p>
+        <p>Description: <input type='text' name='description'></p>
+        <p>Price: <input type='text' name='price'></p>
+        <button type ='submit'>Create</button>
+    </form>
+
+</body>
 </html>
 

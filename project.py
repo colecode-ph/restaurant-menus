@@ -26,6 +26,21 @@ def IndexPage():
     return render_template('index.html', restaurants = restaurants)
 
 
+@app.route('/restaurant/<int:restaurant_id>/edit/', methods=['GET', 'POST'])
+def editRestaurant(restaurant_id):
+    """ Form to edit a restaurant name, and logic to POST the edit to db """
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+
+    if request.method == 'POST':
+        session.query(Restaurant).filter_by(id=restaurant_id).update({"name": request.form['name']})
+        # restaurant.name = Restaurant(name = request.form['name'], id = restaurant_id)
+        session.commit()
+        return redirect(url_for('IndexPage'))
+
+    else:
+        return render_template('edit_restaurant.html', restaurant = restaurant)
+
+
 @app.route('/menu/<int:restaurant_id>/')
 def Menu(restaurant_id):
     """ Shows the menu for a particular restaurant """
@@ -51,6 +66,7 @@ def NewItem(restaurant_id):
 
     else:
         return render_template('new_menu_item.html', restaurant = restaurant)
+
 
 @app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/edit/')
 def editMenuItem(restaurant_id, menu_id):

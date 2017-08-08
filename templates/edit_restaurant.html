@@ -1,0 +1,12 @@
+<html>
+<body>
+
+    <h1>Edit the name of the Restaurant: {{ restaurant.name }}</h1>
+
+    <form method='POST' action='/restaurant/{{ restaurant.id }}/edit/'>
+        <p>New Name: <input type='text' name='name' value='{{ restaurant.name }}'></p>
+        <button type ='submit'>Submit</button>
+    </form>
+
+</body>
+</html>
