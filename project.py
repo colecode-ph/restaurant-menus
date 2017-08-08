@@ -26,7 +26,7 @@ def IndexPage():
     return render_template('index.html', restaurants = restaurants)
 
 
-@app.route('/menu/<int:restaurant_id>')
+@app.route('/menu/<int:restaurant_id>/')
 def Menu(restaurant_id):
     """ Shows the menu for a particular restaurant """
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
@@ -34,7 +34,7 @@ def Menu(restaurant_id):
     return render_template('menu.html', restaurant = restaurant, items = items)
 
 
-@app.route('/menu/<int:restaurant_id>/newitem', methods=['GET', 'POST'])
+@app.route('/menu/<int:restaurant_id>/newitem/', methods=['GET', 'POST'])
 def NewItem(restaurant_id):
     """ Form to add a new menu item, and logic to POST the new item to db """
     restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
@@ -50,7 +50,7 @@ def NewItem(restaurant_id):
         return redirect(url_for('Menu', restaurant_id = restaurant.id))
 
     else:
-        return render_template('menu_item.html', restaurant = restaurant)
+        return render_template('new_menu_item.html', restaurant = restaurant)
 
 @app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/edit/')
 def editMenuItem(restaurant_id, menu_id):
@@ -61,12 +61,20 @@ def editMenuItem(restaurant_id, menu_id):
 
 
 
-@app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/delete/')
+@app.route('/restaurant/<int:restaurant_id>/<int:menu_id>/delete/', methods=['GET', 'POST'])
 def deleteMenuItem(restaurant_id, menu_id):
-    # return "page to delete a menu item. Task 3 complete!"
+    """ Form to delete menu item, and redirect upon POST """
     menu_item = session.query(MenuItem).filter_by(id = menu_id).one()
-    output = "are you sure you want to delete {}?".format(menu_item.name)
-    return output
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+
+    if request.method == 'POST':
+        session.delete(menu_item)
+        session.commit()
+        # return "item deleted!"
+        return redirect(url_for('Menu', restaurant_id = restaurant.id))
+
+    else:
+        return render_template('delete_item.html', menu_item = menu_item, restaurant = restaurant)
 
 
 if __name__ == '__main__':
