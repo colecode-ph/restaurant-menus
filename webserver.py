@@ -119,7 +119,7 @@ class webserverHandler(BaseHTTPRequestHandler): # extends BaseHTTPRequestHandler
                 else:
                     print ("FAIL!")
 
-                # create a new Restaurant class
+                # create a new Restaurant class (instance)
                 newRestaurant = Restaurant(name = messagecontent[0])
                 session.add(newRestaurant)
                 session.commit()
