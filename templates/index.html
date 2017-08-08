@@ -1,0 +1,14 @@
+<html>
+    <body>
+        <h1>Restaurant List</h1>
+        <ul>
+
+        {% for resto in restaurants %}
+
+            <li>{{ resto.name}} - <a href='/menu/{{ resto.id }}'>View Menu</a></li>
+
+        {% endfor %}
+
+        </ul>
+    </body>
+</html>
