@@ -2,13 +2,14 @@
 <body>
 
     <h1>Restaurant List</h1>
-    <a href="/restaurant/add">Add new restaurant to the list</a>
+    <a href="/restaurant/add/">Add new restaurant to the list</a>
     <ul>
 
     {% for resto in restaurants %}
 
         <li>{{ resto.name}} - <a href='/menu/{{ resto.id }}/'>View Menu</a> -
-        <a href='/restaurant/{{ resto.id }}/edit/'>Edit Name</a></li>
+        <a href='/restaurant/{{ resto.id }}/edit/'>Edit Name</a> -
+        <a href='/restaurant/{{ resto.id }}/delete/'>Delete</a></li>
     {% endfor %}
 
     </ul>

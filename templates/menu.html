@@ -3,7 +3,7 @@
 
     <h1>Menu for: {{ restaurant.name }}</h1>
     <a href="/">Go back to Restaurant Index</a></br>
-    <a href="{{url_for('NewItem', restaurant_id = restaurant.id)}}">Create New Menu Item</a>
+    <a href="{{url_for('addMenuItem', restaurant_id = restaurant.id)}}">Create New Menu Item</a>
 
     {% for i in items %}
 

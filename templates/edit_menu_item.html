@@ -1,0 +1,14 @@
+<html>
+<body>
+
+    <h1>Edit the Menu Item: {{ menu_item.name }}</h1>
+
+    <form method='POST' action='/restaurant/{{ restaurant.id }}/{{ menu_item.id }}/edit/'>
+        <p>New Item Name: <input type='text' name='name' size='35' value='{{ menu_item.name }}'></p>
+        <p>New Item Description: <input type='text' name='description' size='45' value='{{ menu_item.description }}'></p>
+        <p>New Item Price: <input type='text' name='price' size='45' value='{{ menu_item.price }}'></p>
+        <button type ='submit'>Submit</button>
+    </form>
+
+</body>
+</html>
