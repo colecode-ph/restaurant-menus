@@ -26,6 +26,32 @@ def IndexPage():
     return render_template('index.html', restaurants = restaurants)
 
 
+@app.route('/restaurant/add/', methods=['GET', 'POST'])
+def addRestaurant():
+    """ Form to add a new restaurant, and logic to POST it to db """
+    if request.method == 'POST':
+        new_resto = Restaurant(name = request.form['name'])
+        session.add(new_resto)
+        session.commit()
+        return redirect(url_for('IndexPage'))
+    else:
+        return render_template('add_restaurant.html')
+
+
+@app.route('restaurant/<int:restaurant_id>/delete/', methods=['GET', 'POST'])
+def deleteRestaurant():
+    """ Form to delete menu item, and redirect upon POST """
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+
+    if request.method == 'POST':
+        session.delete(menu_item)
+        session.commit()
+        # return "item deleted!"
+        return redirect(url_for('Menu', restaurant_id = restaurant.id))
+    else:
+        return render_template('delete_restaurant.html', restaurant = restaurant)
+
+
 @app.route('/restaurant/<int:restaurant_id>/edit/', methods=['GET', 'POST'])
 def editRestaurant(restaurant_id):
     """ Form to edit a restaurant name, and logic to POST the edit to db """
@@ -36,7 +62,6 @@ def editRestaurant(restaurant_id):
         # restaurant.name = Restaurant(name = request.form['name'], id = restaurant_id)
         session.commit()
         return redirect(url_for('IndexPage'))
-
     else:
         return render_template('edit_restaurant.html', restaurant = restaurant)
 
@@ -63,7 +88,6 @@ def NewItem(restaurant_id):
         session.add(newItem)
         session.commit()
         return redirect(url_for('Menu', restaurant_id = restaurant.id))
-
     else:
         return render_template('new_menu_item.html', restaurant = restaurant)
 
@@ -88,7 +112,6 @@ def deleteMenuItem(restaurant_id, menu_id):
         session.commit()
         # return "item deleted!"
         return redirect(url_for('Menu', restaurant_id = restaurant.id))
-
     else:
         return render_template('delete_item.html', menu_item = menu_item, restaurant = restaurant)
 
