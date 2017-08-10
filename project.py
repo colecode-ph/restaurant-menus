@@ -7,7 +7,7 @@ from database_setup import Base, Restaurant, MenuItem
 
 engine = create_engine('sqlite:///restaurantmenu.db')
 Base.metadata.bind = engine
-# binds the engine to the Base class -
+# binds the engine to the Base class
 # makes the connections between class definitions & corresponding tables in db
 DBSession = sessionmaker(bind = engine)
 # creates sessionmaker object, which establishes link of
