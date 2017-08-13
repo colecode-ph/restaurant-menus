@@ -7,7 +7,7 @@
     </div>
 
     <div class='content'>
-        <form method='POST' action='/restaurant/{{ restaurant.id }}/edit/'>
+        <form method='POST' action="{{ url_for('editRestaurant', restaurant_id = restaurant.id) }}">
             <p>New Name: <input type='text' name='name' size='35' value='{{ restaurant.name }}'></p>
             <button type ='submit'>Submit</button>
         </form>
