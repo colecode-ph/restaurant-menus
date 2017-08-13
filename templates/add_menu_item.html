@@ -7,7 +7,7 @@
     </div>
 
     <div class='content'>
-        <form method='POST' action='/menu/{{ restaurant.id }}/newitem/'>
+        <form method='POST' action="{{ url_for('addMenuItem', restaurant_id = restaurant.id) }}">
             <p>Item: <input type='text' size='35' name='item'></p>
             <p>Description: <input type='text' size='70' name='description'></p>
             <p>Price: <input type='text' name='price'></p>
