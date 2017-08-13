@@ -21,7 +21,7 @@
 
         {% for resto in restaurants %}
 
-            <li>{{ resto.name}} - <a href='/menu/{{ resto.id }}/'>View Menu</a> -
+            <li>{{ resto.name}} - <a href='{{url_for('menu', restaurant_id = resto.id)}}'>View Menu</a> -
             <a href='/restaurant/{{ resto.id }}/edit/'>Edit Name</a> -
             <a href='/restaurant/{{ resto.id }}/delete/'>Delete</a></li>
         {% endfor %}

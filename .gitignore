@@ -1,2 +1,6 @@
 *.pyc
 restaurantmenu.db
+lotsofmenus.py
+basic-webserver.py
+__pycache__/database_setup.cpython-36.pyc
+webserver.py
