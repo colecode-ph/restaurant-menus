@@ -1,14 +1,19 @@
 <html>
 <body>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 
-    <h1>Create New Menu Item For: {{ restaurant.name }}</h1>
+    <div class='header'>
+        <h1>Create New Menu Item For: {{ restaurant.name }}</h1>
+    </div>
 
-    <form method='POST' action='/menu/{{ restaurant.id }}/newitem/'>
-        <p>Item: <input type='text' size='35' name='item'></p>
-        <p>Description: <input type='text' size='70' name='description'></p>
-        <p>Price: <input type='text' name='price'></p>
-        <button type ='submit'>Create</button>
-    </form>
+    <div class='content'>
+        <form method='POST' action='/menu/{{ restaurant.id }}/newitem/'>
+            <p>Item: <input type='text' size='35' name='item'></p>
+            <p>Description: <input type='text' size='70' name='description'></p>
+            <p>Price: <input type='text' name='price'></p>
+            <button type ='submit'>Create</button>
+        </form>
+    </div>
 
 </body>
 </html>

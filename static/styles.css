@@ -1,0 +1,55 @@
+.header {
+    background-color: none;
+    text-align: center;
+}
+/*.header h1 {
+    text-align: center;
+}*/
+.content {
+    background-color: white;
+    padding: 35px;
+    margin: 35px;
+    border-radius: 20px;
+}
+.content a {
+    color: #5D8692
+}
+h1, h2 {
+    font-family: 'Georgia', serif;
+    margin: 0;
+    color: #FFFFFF;
+}
+h2 {
+    font-size: 1.2em;
+}
+body {
+    font-family: sans-serif;
+    background-color: #5D8692
+}
+ul {
+    padding: 0px;
+}
+li {
+    list-style:none;
+}
+p {
+    color: #777777;
+}
+a {
+    text-decoration: none;
+    color:#FFFFCC;
+    font-size: .75em;
+}
+-----------------------------------------------------------------
+
+
+ .pane {position:absolute; left: 25%; border: 2px solid;
+    border-radius: 25px; padding: 5px; margin: 5px; border-color: #999999; background-color: #333333 }
+
+.name {width:50%;display: inline-block; float: left;}
+.description {}
+.price {text-align: right; width:50%; float: right; }
+.editdeletepane{}
+
+.flash          { background: #cee5F5; }
+.error          { background: #f0d6d6; padding: 0.5em; } */

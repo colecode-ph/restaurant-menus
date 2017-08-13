@@ -1,11 +1,16 @@
 <html>
 <body>
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
 
-    <h1>Are you sure you want to delete "{{ menu_item.name }}" from the menu?</h1>
+    <div class='header'>
+        <h1>Are you sure you want to delete "{{ menu_item.name }}" from the menu?</h1>
+    </div>
 
-    <form method='POST' action='/restaurant/{{ restaurant.id }}/{{ menu_item.id }}/delete/'>
-        <button type='submit'>HELL YES!</button>
-    </form>
+    <div class='content'>
+        <form method='POST' action='/restaurant/{{ restaurant.id }}/{{ menu_item.id }}/delete/'>
+            <button type='submit'>HELL YES!</button>
+        </form>
+    </div>
 
 </body>
 </html>

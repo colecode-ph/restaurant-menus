@@ -1,6 +1,7 @@
 <html>
 <body>
 <link rel=stylesheet type=text/css href="{{ url_for('static', filename='styles.css') }}">
+    <div class='header'>
     <h1>Menu for: {{ restaurant.name }}</h1>
     <a href="/">Go back to Restaurant Index</a></br>
     <a href="{{url_for('addMenuItem', restaurant_id = restaurant.id)}}">Create New Menu Item</a>
@@ -16,6 +17,8 @@
         {% endif %}
     {% endwith %}
 
+    </div>
+    <div class='content'>
     <!--  This loop creates the list of restaurants  -->
     {% for i in items %}
 
@@ -31,5 +34,6 @@
 
     {% endfor %}
 
+    </div>
 </body>
 </html>
