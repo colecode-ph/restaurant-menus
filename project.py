@@ -100,7 +100,7 @@ def deleteMenuItem(restaurant_id, menu_id):
     if request.method == 'POST':
         session.delete(menu_item)
         session.commit()
-        flash('Congratulations! Restaurant Successfully Deleted!')
+        flash('Congratulations! Menu Item Successfully Deleted!')
         return redirect(url_for('menu', restaurant_id = restaurant.id))
     else:
         return render_template('delete_menu_item.html', menu_item = menu_item, restaurant = restaurant)
