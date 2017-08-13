@@ -7,7 +7,7 @@
 </div>
 
 <div class='content'>
-    <form method='POST' action='/restaurant/{{ restaurant.id }}/delete/'>
+    <form method='POST' action="{{url_for('deleteRestaurant', restaurant_id = restaurant.id)}}">
         <button type='submit'>HELL YES!</button>
     </form>
 </div>
