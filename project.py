@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash
+from flask import Flask, request, render_template, redirect, url_for, flash, jsonify
 app = Flask(__name__)
 
 from sqlalchemy import create_engine, func, update
@@ -123,6 +123,20 @@ def editMenuItem(restaurant_id, menu_id):
         return redirect(url_for('menu', restaurant_id = restaurant.id))
     else:
         return render_template('edit_menu_item.html', menu_item = menu_item, restaurant = restaurant)
+
+
+@app.route('/menu/<int:restaurant_id>/JSON')
+def restaurantMenuJSON(restaurant_id):
+    restaurant = session.query(Restaurant).filter_by(id=restaurant_id).one()
+    items = session.query(MenuItem).filter_by(
+        restaurant_id=restaurant_id).all()
+    return jsonify(MenuItems=[i.serialize for i in items])
+
+
+@app.route('/menu/<int:restaurant_id>/<int:menu_id>/JSON')
+def restaurantMenuItemJSON(restaurant_id, menu_id):
+    item = session.query(MenuItem).filter_by(id=menu_id).one()
+    return jsonify(item.serialize)
 
 
 if __name__ == '__main__':
